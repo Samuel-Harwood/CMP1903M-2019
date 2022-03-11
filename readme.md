@@ -1,0 +1,1 @@
+# Program that analysis text and writes stats on the console or the text file
