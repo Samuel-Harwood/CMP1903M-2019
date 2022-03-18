@@ -9,9 +9,6 @@ namespace CMP1903M_Assessment_1_Base_Code
     {
         static void Main()
         {
-            //Local list of integers to hold the first five measurements of the text
-            List<int> parameters = new List<int>();
-
             //Create 'Input' object
             //Get either manually entered text, or text from a file
             var input = new Input();
@@ -28,24 +25,31 @@ namespace CMP1903M_Assessment_1_Base_Code
 
 
             //Receive a list of integers back
-            parameters = analyse.analyseText(input);
+            var analysis = analyse.analyseText(input);
 
 
             //Report the results of the analysis
             var report = new Report();
+            Console.WriteLine();
+            // also output the report to report.txt
             Console.WriteLine("Writing analysis results to .\\report.txt...");
-            //report.outputToPath(parameters, ".\report.txt");
+            report.outputStatsToPath(analysis, ".\\report.txt");
             Console.WriteLine();
             Console.WriteLine();
-            report.outputConsole(parameters);
+            // print the analysis result to console
+            report.printInputStatsToConsole(analysis);
 
 
-            //TO ADD: Get the frequency of individual letters?
 
-
-        }
-        
-        
-    
+            //Get the frequency of individual letters
+            var frequency = analyse.letterFrequency(input);
+            Console.WriteLine();
+            // outputting the lettter frequency to frequency.txt
+            Console.WriteLine("Writing letter frequency results to .\\frequency.txt...");
+            Console.WriteLine();
+            Console.WriteLine();
+            // print the letter frequency to console
+            report.outputLetterFrequencyToConsole(frequency);
+        } 
     }
 }
