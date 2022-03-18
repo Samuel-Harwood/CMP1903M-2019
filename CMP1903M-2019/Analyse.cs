@@ -138,5 +138,29 @@ namespace CMP1903M_Assessment_1_Base_Code
 
             return lower_case_count;
         }
+
+
+        // counts and returns the frequency of each letter from the input
+        public List<int> letterFrequency(Input input)
+        {
+            var letter_count = new List<int>(new int[26]);
+            var a_value = (int)'a';
+
+            foreach (var ch in input.text.ToCharArray())
+            {
+                if (char.IsWhiteSpace(ch) || !char.IsLetter(ch))
+                {
+                    continue;
+                }
+
+                var ch_clean = char.ToLower(ch);
+
+                var ch_clean_value = (int)ch_clean;
+
+                letter_count[ch_clean_value - a_value]++;
+            }
+
+            return letter_count;
+        }
     }
 }

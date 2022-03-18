@@ -10,18 +10,55 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Maybe have different methods for different formats of output?
         //eg.   public void outputConsole(List<int>)
 
-        public void outputConsole(List<int> values)
+        // prints result of analysis to the console
+        public void printInputStatsToConsole(List<int> values)
         {
             printAnalysisHeader();
+            Console.WriteLine("stats of the input:");
 
             Console.WriteLine(valuesToReport(values));
 
             printAnalysisFooter();
         }
 
-        public void outputToPath(List<int> values, string path)
+        // outputs the analysis of the input to a file path
+        public void outputStatsToPath(List<int> values, string path)
         {
             File.WriteAllText(path, valuesToReport(values));
+        }
+
+        // writes frequency of the letters to the console
+        public void outputLetterFrequencyToConsole(List<int> frequency)
+        {
+            printAnalysisHeader();
+            Console.WriteLine("frequency of letters: ");
+
+            Console.WriteLine(letterFrequencyToReport(frequency));
+
+            printAnalysisFooter();
+        }
+
+        public void outputLetterFrequencyToPath(List<int> frequency, string path)
+        {
+            File.WriteAllText(path, letterFrequencyToReport(frequency));
+        }
+
+        // method that converts the frequency list into a humal readable analysis report
+        static string letterFrequencyToReport(List<int> frequency)
+        {
+            var a_value = (int)'a';
+
+            var frequency_string = new List<string>();
+
+            for (int i = 0; i < frequency.Count; i++)
+            {
+                var ch = (char)(i + a_value);
+                var count = frequency[i];
+
+                frequency_string.Add(char.ToUpper(ch) + ": " + count);
+            }
+
+            return string.Join(", ", frequency_string);
         }
 
         // method that converts the values format into a human readable analysis report
