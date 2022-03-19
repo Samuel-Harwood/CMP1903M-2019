@@ -13,10 +13,14 @@ namespace CMP1903M_Assessment_1_Base_Code
             //Get either manually entered text, or text from a file
             var input = new Input();
 
-            Console.WriteLine("Please enter the text to analyse");
-            // for this case, I'm just going to ask the user for the input
-            input.manualTextInput();
-            Console.WriteLine();
+
+            // ask for input
+            input.askInputMode();
+
+            // handle input
+            input.handleInput();
+
+            Console.WriteLine(input.text);
 
 
             //Create an 'Analyse' object

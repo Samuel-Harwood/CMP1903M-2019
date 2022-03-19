@@ -20,10 +20,6 @@ namespace CMP1903M_Assessment_1_Base_Code
         InputMode _inputMode;
         InputMode inputMode { get { return _inputMode; } }
 
-
-
-
-
         // default parameters
         public Input()
         {
@@ -43,6 +39,37 @@ namespace CMP1903M_Assessment_1_Base_Code
             if (text == null)
             {
                 _text = "";
+            }
+        }
+
+        public void handleInput()
+        {
+            switch (_inputMode)
+            {
+                case InputMode.Manual:
+                    Console.WriteLine("Please enter the text to analyse");
+                    manualTextInput();
+                    break;
+                case InputMode.TextFile:
+                    Console.WriteLine("Enter the path for the text file: ");
+                    string path;
+
+                    while (true)
+                    {
+                        path = Console.ReadLine();
+                        if (File.Exists(path))
+                        {
+                            break;
+                        } else
+                        {
+                            Console.WriteLine("File not found, try again: ");
+                        }
+                    }
+
+                    fileTextInput(path);
+                    break;
+                default:
+                    throw new Exception("Unimplented input mode");
             }
         }
 
@@ -74,13 +101,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 
                 if (input_check_ok)
                 {
-                    if (inputMode == InputMode.TextFile)
-                    {
-                        Console.WriteLine("Please enter ");
-                    }
-                } else
-                {
-
+                    break;
                 }
             }
         }
@@ -91,12 +112,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         // Gets text input from a .txt file
         public void fileTextInput(string fileName)
         {
-            var _text = File.ReadAllText(fileName);
-
-            if (_text == null)
-            {
-                _text = "";
-            }
+            _text = File.ReadAllText(fileName);
         }
     }
 }
